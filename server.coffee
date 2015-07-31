@@ -37,7 +37,11 @@ supportedMethods = ["get", "post", "put", "del", "head"]
 supportedEndpointExtensions = [".coffee", ".js"]
 
 mapEndpoint = (name, method, uri, fns...) ->
-	server[method] uri, fns...
+	server[method]
+		path: uri
+		name: name
+	, fns...
+	
 	logger.info
 		endpoint:
 			method: method

@@ -9,6 +9,6 @@
     "restify-cookies": "^0.1.1"
   },
   "scripts": {
-  	"start": "node_modules/.bin/coffee server.coffee"
+  	"start": "node_modules/.bin/coffee server.coffee | node_modules/.bin/bunyan"
   }
 }

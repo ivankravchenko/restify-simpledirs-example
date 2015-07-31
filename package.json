@@ -7,5 +7,8 @@
     "coffee-script": "^1.9.3",
     "restify": "^3.0.3",
     "restify-cookies": "^0.1.1"
+  },
+  "scripts": {
+  	"start": "node_modules/.bin/coffee server.coffee"
   }
 }

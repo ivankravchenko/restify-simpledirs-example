@@ -36,7 +36,9 @@ server.use require('restify-cookies').parse
 supportedMethods = ["get", "post", "put", "del", "head"]
 supportedEndpointExtensions = [".coffee", ".js"]
 
-mapEndpoint = (name, method, uri, fns...) ->
+mapEndpoint = (localName, method, uri, fns...) ->
+	name = "#{method}:#{localName}"
+
 	server[method]
 		path: uri
 		name: name
@@ -57,8 +59,9 @@ initEndpoints = (directoryPath, uri, mapEndpoint) ->
 			extension = path.extname name
 			if extension in supportedEndpointExtensions
 				endpoint = require path.resolve(directoryPath, name)
-				endpointName = path.basename name, extension
-				endpointUri = if endpointName is "index" then uri else uri + endpointName
+				localEntrypointName = path.basename name, extension
+				endpointUri = if localEntrypointName is "index" then uri else uri + localEntrypointName
+				endpointName = uri + localEntrypointName
 				if typeof endpoint is "function"
 					mapEndpoint endpointName, "get", endpointUri, endpoint
 				else if typeof endpoint is "object"
